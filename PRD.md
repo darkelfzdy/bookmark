@@ -94,11 +94,12 @@ DELETE /api/bookmarks/:id - 删除特定书签
 ## 5. 开发与测试流程
 
 ### 5.1 开发环境设置
-1. 安装Node.js和npm
-2. 安装项目依赖
-   - Next.js
-   - React
-   - 其他必要依赖
+1. 项目已完成git初始化，需要安装所有其他依赖:
+   ```
+   npm install next react react-dom
+   npm install -D wrangler
+   ```
+2. 添加其他必要的开发依赖
 3. 设置开发脚本(package.json)
 
 ### 5.2 本地开发步骤
@@ -112,12 +113,15 @@ DELETE /api/bookmarks/:id - 删除特定书签
    - 定义API端点处理书签的CRUD操作
 
 ### 5.3 本地测试
-1. 使用`wrangler`进行本地测试
+1. 使用`wrangler`进行本地测试:
    ```
-   wrangler dev
+   npx wrangler dev
    ```
-2. 在浏览器中访问本地开发服务器
-3. 测试书签添加、删除和显示功能
+2. 这将同时启动Worker和Durable Objects的本地模拟环境
+3. 需要进行额外步骤配置Durable Objects的本地测试环境:
+   - 确保wrangler.toml中正确配置了Durable Objects
+   - 可能需要运行`wrangler dev --local`以使用本地存储
+4. 在浏览器中访问本地开发服务器进行完整功能测试
 
 ### 5.4 分步测试策略
 1. **静态前端测试**:
@@ -152,7 +156,6 @@ DELETE /api/bookmarks/:id - 删除特定书签
 3. 授权Cloudflare访问GitHub仓库
 4. 选择包含书签管理应用的仓库
 5. 配置构建设置和环境变量
-6. 生成一个完成的Cloudflare workers部署说明
 
 ### 6.4 自动部署
 每次推送到GitHub仓库时，Cloudflare将自动:
@@ -192,3 +195,4 @@ DELETE /api/bookmarks/:id - 删除特定书签
 - 需要生成适当的.gitignore文件
 - 不使用open命令
 - 针对非技术人员的分步测试说明，便于问题排查
+- 在项目完成后，将提供详细的Cloudflare Workers项目网页部署指导文档
