@@ -38,14 +38,20 @@
    - 选择“GitHub”作为提供商，并授权Cloudflare访问您的GitHub账户。
    - 找到并选择您之前创建的书签管理网站仓库。
    - 配置构建设置：
-     - 构建命令：`npm install && npm run build`（假设您的package.json中有build脚本）
-     - 构建输出目录：`.next`（Next.js的默认输出目录）
-     - 环境变量：根据需要添加环境变量（例如，API密钥等）。
+     - **构建命令**：`npm install && npm run build`（确保您的`package.json`中包含`build`脚本，用于构建Next.js应用）。
+     - **构建输出目录**：`.next`（Next.js的默认输出目录，Cloudflare Workers将使用此目录中的文件进行部署）。
+     - **环境变量**：由于项目使用了Durable Objects，您需要设置以下环境变量：
+       - `NODE_ENV`：设置为`production`，以确保应用在生产模式下运行。
+       - 如果有其他与Durable Objects相关的配置或API密钥，请在此添加。例如，某些情况下可能需要设置`CF_ACCOUNT_ID`和`CF_API_TOKEN`以便与Cloudflare API交互。
    - 保存设置，Cloudflare将自动开始从您的GitHub仓库构建和部署。
 
 4. **验证部署状态**：
    - 返回到Worker的“概述”页面，查看构建和部署状态。
    - 构建成功后，您的Worker将被部署到一个类似`bookmark-manager.您的账户.workers.dev`的URL上。
+   - 如果部署失败，请检查构建日志，常见问题可能包括：
+     - 构建命令或输出目录设置错误。
+     - 缺少必要的环境变量，导致Durable Objects无法正常工作。
+     - 确保`wrangler.toml`文件中正确配置了Durable Objects的绑定和迁移（例如，`durable_objects`部分应定义对象的名称和类名）。
 
 ## 配置自定义域名（可选）
 

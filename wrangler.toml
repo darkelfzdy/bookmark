@@ -8,8 +8,8 @@ bindings = [
 ]
 
 [[migrations]]
-tag = "v1"
-new_classes = ["BookmarkStore"]
+tag = "v1"  
+new_sqlite_classes = ["BookmarkStore"]
 
 [env]
 # 环境变量占位符，后续自动部署时可在此添加具体的变量
