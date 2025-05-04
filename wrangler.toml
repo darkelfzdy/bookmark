@@ -1,0 +1,23 @@
+name = "bookmark-manager"
+main = "src/index.js"
+compatibility_date = "2025-05-04"
+
+[durable_objects]
+bindings = [
+  { name = "BOOKMARKS", class_name = "BookmarkStore" }
+]
+
+[[migrations]]
+tag = "v1"
+new_classes = ["BookmarkStore"]
+
+[env]
+# 环境变量占位符，后续自动部署时可在此添加具体的变量
+# 示例: API_KEY = "your-api-key-here"
+
+[[kv_namespaces]]
+binding = "__STATIC_CONTENT"
+id = "static-content-id"
+
+[vars]
+__STATIC_CONTENT_MANIFEST = '{"/":".next/static/chunks/pages/index.js","/_next/*":".next/*"}'
