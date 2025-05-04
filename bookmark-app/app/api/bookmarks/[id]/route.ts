@@ -1,11 +1,9 @@
 import { supabase } from '@/lib/db'
 import { NextResponse } from 'next/server'
 
-import type { NextRequest } from 'next/server'
-
 export async function DELETE(
   req: Request,
-  context: any
+  context: { params: { id: string } }
 ) {
   const params = context.params;
   const { error } = await supabase
