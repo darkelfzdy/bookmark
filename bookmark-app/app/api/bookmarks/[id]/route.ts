@@ -1,10 +1,12 @@
 import { supabase } from '@/lib/db'
 import { NextResponse } from 'next/server'
 
+import type { NextRequest } from 'next/server'
+
 export async function DELETE(
-  request: Request,
+  request: NextRequest,
   { params }: { params: { id: string } }
-): Promise<NextResponse> {
+) {
   const { error } = await supabase
     .from('bookmarks')
     .delete()
