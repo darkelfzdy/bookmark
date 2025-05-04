@@ -20,21 +20,24 @@
 1. **项目名称**：输入一个名称，例如`bookmark-manager`。
 2. **生产分支**：通常选择`main`或`master`分支。
 3. **构建设置**：
+   - **框架预设**：建议保持为空。选择`Next.js`作为框架预设可能会导致构建命令和输出目录自动更改为不符合项目配置的设置（如构建命令变为`npx @cloudflare/next-on-pages@1`，输出目录变为`.vercel/output/static`）。
    - **构建命令**：输入`npm run build`。
    - **构建输出目录**：输入`.next`。
+   - **如果已选择Next.js预设**：如果您已经选择了`Next.js`作为框架预设，请手动调整构建命令为`npm run build`，输出目录为`.next`，以确保与项目配置一致。
 4. 点击“Save and Deploy”按钮开始首次部署。Cloudflare会自动拉取代码、构建并部署您的应用。
 
 ## 3. 创建Durable Object Namespace
 
-为了让应用能够持久化存储书签数据，您需要在Cloudflare Dashboard中创建Durable Object Namespace：
+为了让应用能够持久化存储书签数据，您需要在Cloudflare Dashboard中创建Durable Object Namespace。以下是详细步骤：
 
 1. **导航到Workers & Pages**：在Cloudflare Dashboard左侧菜单中选择“Workers & Pages”。
-2. **创建Namespace**：
-   - 点击“Create service”按钮。
-   - 选择“Durable Object”类型。
-   - 输入一个名称，例如`bookmarks-namespace`。
-   - 点击“Create service”完成创建。
-3. 记下创建的Namespace ID，稍后会用到。
+2. **进入Durable Objects选项**：
+   - 在“Workers & Pages”页面中，点击左侧菜单中的“Durable Objects”选项。如果您没有看到此选项，请确保您已启用Workers功能（可以通过账户设置或计划升级启用）。
+3. **创建Namespace**：
+   - 在“Durable Objects”页面中，点击“Create namespace”按钮。
+   - 输入一个名称，例如`bookmarks-namespace`。名称应简洁且能反映用途。
+   - 点击“Create”完成创建。
+4. 记下创建的Namespace ID，稍后会用到。您可以在“Durable Objects”页面中找到此ID。
 
 ## 4. 添加Durable Object绑定
 
