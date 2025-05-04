@@ -1,0 +1,12 @@
+name = "bookmark-manager"
+main = "src/worker.js"
+compatibility_date = "2025-05-04"
+
+[durable_objects]
+bindings = [
+  { name = "BOOKMARKS", class_name = "Bookmarks" }
+]
+
+[[migrations]]
+tag = "v1"
+new_classes = ["Bookmarks"]
